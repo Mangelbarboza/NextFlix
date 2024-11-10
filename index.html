@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Clone</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="navbar-logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg" alt="Netflix Logo">
+        </div>
+        <div class="navbar-links">
+            <a href="#">Inicio</a>
+            <a href="#">Series</a>
+            <a href="#">Películas</a>
+            <a href="#">Novedades Populares</a>
+            <a href="#">Mi lista</a>
+        </div>
+        <div class="navbar-user">
+            <button class="btn-login">Iniciar Sesión</button>
+        </div>
+    </header>
+
+    <!-- Main Banner -->
+    <section class="banner" style="background-image: url('https://picsum.photos/1920/800?random=50');">
+        <div class="banner-content">
+            <h1>Películas y series ilimitadas y mucho más.</h1>
+            <p>Disfruta donde quieras. Cancela cuando quieras.</p>
+            <button class="btn-primary">Ver Ahora</button>
+        </div>
+    </section>
+
+    <!-- Recommendations Sections -->
+    <section class="recommendations">
+        <h2>Continuar viendo</h2>
+        <div id="continue-watching" class="movie-grid scrollable"></div>
+    </section>
+
+    <section class="recommendations">
+        <h2>Popular en tu zona</h2>
+        <div id="popular-in-your-area" class="movie-grid scrollable"></div>
+    </section>
+
+    <section class="recommendations">
+        <h2>Acción</h2>
+        <div id="action" class="movie-grid scrollable"></div>
+    </section>
+
+    <section class="recommendations">
+        <h2>Comedia</h2>
+        <div id="comedy" class="movie-grid scrollable"></div>
+    </section>
+
+    <section class="recommendations">
+        <h2>Drama</h2>
+        <div id="drama" class="movie-grid scrollable"></div>
+    </section>
+
+    <!-- SQL Query Section -->
+    <section class="sql-query-section">
+        <h2>Ejecutar Consulta SQL</h2>
+        <div class="sql-query-container">
+            <textarea id="sql-query" placeholder="Escribe tu consulta SQL aquí..." rows="4"></textarea>
+            <button onclick="executeSQL()">Ejecutar Consulta</button>
+        </div>
+        <div id="sql-result" class="sql-result" placeholder="Resultados...">Resultados de la consulta aparecerán aquí</div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2023 Netflix Clone</p>
+        <p>Política de Privacidad · Términos de Uso · Contacto</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scrip.js"></script>
+    
+    <!-- Script para cargar películas de la API -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Realiza la solicitud para obtener películas del servidor
+            fetch('http://localhost:3000/api/peliculas')
+                .then(response => response.json())
+                .then(data => {
+                    // Clasificar películas por género
+                    const genres = {
+                        'Continuar viendo': document.getElementById('continue-watching'),
+                        'Popular en tu zona': document.getElementById('popular-in-your-area'),
+                        'Acción': document.getElementById('action'),
+                        'Comedia': document.getElementById('comedy'),
+                        'Drama': document.getElementById('drama')
+                    };
+
+                    // Iterar sobre los datos recibidos
+                    data.forEach(movie => {
+                        const movieCard = document.createElement('a');
+                        movieCard.href = `player.html?movie=${movie.ID}`;
+                        movieCard.classList.add('movie-card');
+
+                        const img = document.createElement('img');
+                        img.src = movie.URL_Caratula;
+                        img.alt = movie.Nombre;
+
+                        movieCard.appendChild(img);
+
+                        // Agregar la película al contenedor correspondiente según su género
+                        if (genres[movie.Genero]) {
+                            genres[movie.Genero].appendChild(movieCard);
+                        }
+                    });
+                })
+                .catch(error => console.error('Error al cargar películas:', error));
+        });
+    </script>
+</body>
+</html>

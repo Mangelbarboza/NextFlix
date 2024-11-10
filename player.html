@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor de Video - Netflix Clone</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="navbar-logo">
+            <a href="index.html">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg" alt="Netflix Logo">
+            </a>
+        </div>
+    </header>
+
+    <!-- Video Player Section -->
+    <section class="video-player-container">
+        <h2>Reproduciendo Video</h2>
+        <iframe id="trailer" width="765" height="430" src="" 
+                title="Reproduciendo Trailer" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+        </iframe>
+    </section>
+
+    <script>
+        // Función para obtener los parámetros de la URL
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Obtener el ID de la película de la URL
+        var movieId = getUrlParameter('movie');
+
+        // Mapear los IDs de películas a sus respectivos trailers
+        var trailers = {
+            1: 'https://uqload.net/embed-yueayp66bndl.html',
+            2: 'https://www.youtube.com/embed/0qSarZpylxs',
+            3: 'https://www.youtube.com/embed/0qSarZpylxs',
+            4: 'https://www.youtube.com/embed/0qSarZpylxs',
+            5: 'https://www.youtube.com/embed/0qSarZpylxs',
+            6: 'https://www.youtube.com/embed/0qSarZpylxs',
+            7: 'https://www.youtube.com/embed/0qSarZpylxs',
+            8: 'https://www.youtube.com/embed/0qSarZpylxs',
+            9: 'https://www.youtube.com/embed/0qSarZpylxs',
+            10: 'https://www.youtube.com/embed/0qSarZpylxs',
+            11: 'https://www.youtube.com/embed/0qSarZpylxs',
+            12: 'https://www.youtube.com/embed/0qSarZpylxs',
+            13: 'https://www.youtube.com/embed/0qSarZpylxs',
+            14: 'https://www.youtube.com/embed/0qSarZpylxs',
+            15: 'https://www.youtube.com/embed/0qSarZpylxs',
+            16: 'https://www.youtube.com/embed/0qSarZpylxs',
+            17: 'https://www.youtube.com/embed/0qSarZpylxs',
+            18: 'https://www.youtube.com/embed/0qSarZpylxs',
+            19: 'https://www.youtube.com/embed/0qSarZpylxs',
+            20: 'https://www.youtube.com/embed/0qSarZpylxs',
+            21: 'https://www.youtube.com/embed/0qSarZpylxs',
+            22: 'https://www.youtube.com/embed/0qSarZpylxs',
+            23: 'https://www.youtube.com/embed/0qSarZpylxs',
+            24: 'https://www.youtube.com/embed/0qSarZpylxs',
+            25: 'https://www.youtube.com/embed/0qSarZpylxs',
+            26: 'https://www.youtube.com/embed/0qSarZpylxs',
+            27: 'https://www.youtube.com/embed/0qSarZpylxs',
+            28: 'https://www.youtube.com/embed/0qSarZpylxs',
+            29: 'https://www.youtube.com/embed/0qSarZpylxs',
+            30: 'https://www.youtube.com/embed/0qSarZpylxs',
+            31: 'https://www.youtube.com/embed/0qSarZpylxs',
+            32: 'https://www.youtube.com/embed/0qSarZpylxs',
+            33: 'https://www.youtube.com/embed/0qSarZpylxs',
+            34: 'https://www.youtube.com/embed/0qSarZpylxs',
+            35: 'https://www.youtube.com/embed/0qSarZpylxs',
+            36: 'https://www.youtube.com/embed/0qSarZpylxs',
+            37: 'https://www.youtube.com/embed/0qSarZpylxs',
+            38: 'https://www.youtube.com/embed/0qSarZpylxs',
+            39: 'https://www.youtube.com/embed/0qSarZpylxs',
+            40: 'https://www.youtube.com/embed/0qSarZpylxs',
+            41: 'https://www.youtube.com/embed/0qSarZpylxs',
+            42: 'https://www.youtube.com/embed/0qSarZpylxs',
+            43: 'https://www.youtube.com/embed/0qSarZpylxs',
+            44: 'https://www.youtube.com/embed/0qSarZpylxs',
+            45: 'https://www.youtube.com/embed/0qSarZpylxs',
+        };
+
+        // Cargar el trailer correspondiente
+        if (trailers[movieId]) {
+            document.getElementById('trailer').src = trailers[movieId] + '?autoplay=1'; // Agrega autoplay si es necesario
+        } else {
+            console.error('Trailer no encontrado para la película con ID: ' + movieId);
+        }
+    </script>
+</body>
+</html>
